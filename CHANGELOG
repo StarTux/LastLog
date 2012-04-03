@@ -1,6 +1,7 @@
 1.0.1
 
 * Fix permissions bug in plugin.yml forbidding console to use the plugin
+* Change distribution do LastLog.jar only plus github repo link on dev.bukkit
 
 1.0
 
