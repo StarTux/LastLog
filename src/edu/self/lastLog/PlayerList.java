@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Thomas Loy.
+ * Copyright 2012 StarTux.
  *
  * This file is part of LastLog.
  *
