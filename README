@@ -1,0 +1,15 @@
+LastLog - show listing of last logged in players
+
+COMMANDS, PERMISSION, COMMENT
+/firstlog [pagenumber] - lastlog.firstlog - list the most recent first logins of players
+/lastlog [pagenumber] - lastlog.lastlog - list the most recent last logins of players
+/loginfo [playername] - lastlog.loginfo - display first and last login date of a player
+
+OTHER PERMISSIONS
+lastlog.notify - receive notification when a player joins for the first time
+
+INSTALLATION
+Copy the LastLog.jar into the plugins folder. Restart Bukkit.
+
+CONFIGURATION
+Except for permissions, none.

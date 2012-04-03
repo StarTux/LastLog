@@ -1,0 +1,47 @@
+1.0.1
+
+* Fix permissions bug in plugin.yml forbidding console to use the plugin
+
+1.0
+
+* Highlight online players in /firstlog and /lastlog output
+
+0.7
+
+* Add Online status to loginfo
+* Attempt to fix rare bogus dates from loginfo
+
+0.6
+
+* FIX bad permission setup
+
+0.5
+
+* FIX firstlog not updating on first join
+* FIX notification not working for non-op
+
+0.4
+
+* Discard invalid dates in "/loginfo"
+* Permissions default to op
+* Commands usable from console
+* Fix duplicate notifications to console
+* Add CHANGELOG file
+
+0.3
+
+* Expand smart player search to find offline players
+* Code clean-up 
+
+0.2
+
+* Display dates in a more pleasant format
+* Fix permissions: They were ignored
+* Optimize: Cache output of time consuming, I/O heavy operations
+* Remove therefore obsolete multithreaded sorting
+* Add notification on first login feature
+* Add README file 
+
+0.1
+
+* initial release
