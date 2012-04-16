@@ -27,8 +27,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.permissions.Permission;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class LastLogPlugin extends JavaPlugin implements Listener {
         private Logger logger;
@@ -38,6 +38,14 @@ public class LastLogPlugin extends JavaPlugin implements Listener {
         private FirstLogExecutor firstLogExecutor = new FirstLogExecutor(this);
         private LastLogExecutor lastLogExecutor = new LastLogExecutor(this);
         private LogInfoExecutor logInfoExecutor = new LogInfoExecutor(this);
+
+        // // debug function. requires command registration!
+        // @Override
+        // public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        //         PlayerJoinEvent event = new PlayerJoinEvent(getServer().getOnlinePlayers()[0], "hello");
+        //         getServer().getPluginManager().callEvent(event);
+        //         return true;
+        // }
 
         @Override
         public void onEnable() {
@@ -74,7 +82,13 @@ public class LastLogPlugin extends JavaPlugin implements Listener {
                 if (!player.hasPlayedBefore()) {
                         firstlogList.set(name, first);
                         String message = LastLogColors.UNKNOWN + name + LastLogColors.HEADER + " has logged in for the first time";
-                        getServer().broadcast(message, NOTIFY_PERMISSION);
+                        // getServer().broadcast(message, NOTIFY_PERMISSION); // this acts weird
+                        getServer().getConsoleSender().sendMessage(message);
+                        for (Player rec : getServer().getOnlinePlayers()) {
+                                if (rec.hasPermission(NOTIFY_PERMISSION)) {
+                                        rec.sendMessage(message);
+                                }
+                        }
                 }
         }
 
