@@ -17,7 +17,7 @@
  * along with LastLog.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.self.lastLog;
+package edu.self.startux.lastLog;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

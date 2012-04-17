@@ -17,7 +17,7 @@
  * along with LastLog.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.self.lastLog;
+package edu.self.startux.lastLog;
 
 import java.util.Date;
 import java.util.Calendar;
