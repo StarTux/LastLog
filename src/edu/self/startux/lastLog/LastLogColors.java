@@ -1,4 +1,4 @@
-/*
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright 2012 StarTux.
  *
  * This file is part of LastLog.
@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with LastLog.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 package edu.self.startux.lastLog;
 
@@ -24,6 +24,7 @@ import org.bukkit.ChatColor;
 public class LastLogColors {
         final public static String PLAYER_NAME = "" + ChatColor.GOLD;
         final public static String HEADER = "" + ChatColor.AQUA;
+        final public static String MINOR = "" + ChatColor.DARK_AQUA;
         final public static String DATE = "" + ChatColor.YELLOW;
         final public static String UNKNOWN = "" + ChatColor.GRAY;
         final public static String ERROR = "" + ChatColor.RED;
