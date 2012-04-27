@@ -1,4 +1,4 @@
-/*
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright 2012 StarTux.
  *
  * This file is part of LastLog.
@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with LastLog.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 package edu.self.startux.lastLog;
 
