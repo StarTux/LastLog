@@ -1,5 +1,5 @@
 name: LastLog
-version: 1.0.1
+version: 1.1
 description: Show listing of last logged in players
 main: edu.self.startux.lastLog.LastLogPlugin
 author: StarTux
