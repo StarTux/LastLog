@@ -165,7 +165,7 @@ public class SimpleCLParser implements CommandLineParser {
 
         public ArrayList<String> parseFlag(FlagData data, ListIterator<String> iter) throws ParseException {
                 ArrayList<String> ls = new ArrayList<String>();
-                int pos = iter.nextIndex() - 1;
+                int pos = iter.previousIndex();
                 for (int i = 0; i < data.argc; ++i) {
                         if (!iter.hasNext()) {
                                 throw new ParseException(data.flag, pos, "argument required");
