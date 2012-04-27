@@ -33,6 +33,7 @@ public class LastLogExecutor implements CommandExecutor {
                 this.lastlog = lastlog;
                 parser.setArgCount(parser.addFlag('a', "after"), 1);
                 parser.setArgCount(parser.addFlag('b', "before"), 1);
+                parser.addFlag('h', "help");
         }
 
         @Override
@@ -54,6 +55,10 @@ public class LastLogExecutor implements CommandExecutor {
                 }
                 if (result.countFlag(parser.getFlag('b')) > 1) {
                         sender.sendMessage(LastLogColors.ERROR + "Option '-b' used more than once!");
+                        return true;
+                }
+                if (result.countFlag(parser.getFlag('h')) > 0) {
+                        plugin.help(sender);
                         return true;
                 }
                 PlayerList.Options options = new PlayerList.Options();
