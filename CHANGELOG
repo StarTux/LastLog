@@ -1,7 +1,12 @@
+1.1
+
+* Some minor fixes and improvements
+* Add -a/--after and -b/--before flags
+
 1.0.1
 
 * Fix permissions bug in plugin.yml forbidding console to use the plugin
-* Change distribution do LastLog.jar only plus github repo link on dev.bukkit
+* Change distribution to LastLog.jar only plus github repo link on dev.bukkit
 
 1.0
 
@@ -41,7 +46,7 @@
 * Optimize: Cache output of time consuming, I/O heavy operations
 * Remove therefore obsolete multithreaded sorting
 * Add notification on first login feature
-* Add README file 
+* Add README file
 
 0.1
 
