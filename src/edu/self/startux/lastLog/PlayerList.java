@@ -1,4 +1,4 @@
-/*
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Copyright 2012 StarTux.
  *
  * This file is part of LastLog.
@@ -15,7 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with LastLog.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 package edu.self.startux.lastLog;
 
@@ -29,6 +29,12 @@ import org.bukkit.Bukkit;
 
 public class PlayerList implements Iterable<PlayerList.Entry> {
         final private static int PAGE_LENGTH = 10; // how many lines per page?
+
+        public static class Options {
+                int pageNumber = 0;
+                LastLogDate after = null;
+                LastLogDate before = null;
+        }
 
         public class Entry {
                 public String name;
@@ -138,25 +144,56 @@ public class PlayerList implements Iterable<PlayerList.Entry> {
         public int getPageCount() {
                 return ((getLength() - 1) / PAGE_LENGTH) + 1;
         }
-        
-        public void displayPage(int pageNumber, boolean lastlog, CommandSender sender) {
-                if (pageNumber >= getPageCount()) {
-                        sender.sendMessage(LastLogColors.ERROR
-                                           + "[LastLog] Page "
-                                           + (pageNumber + 1)
-                                           + " selected, but only "
-                                           + getPageCount()
-                                           + " available!");
+
+        public void displayPage(Options options, boolean lastlog, CommandSender sender) {
+                int minIndex = 0, maxIndex = getLength() - 1;
+                // find minIndex thru after option
+                if (options.after != null) {
+                        for (int i = maxIndex; i >= minIndex; --i) {
+                                if (getEntry(i).time >= options.after.getTime()) {
+                                        maxIndex = i;
+                                        break;
+                                }
+                                maxIndex = minIndex - 1;
+                        }
+                }
+                // find max index thru before option
+                if (options.before != null) {
+                        for (int i = minIndex; i <= maxIndex; ++i) {
+                                if (getEntry(i).time <= options.before.getTime()) {
+                                        minIndex = i;
+                                        break;
+                                }
+                                minIndex = maxIndex + 1;
+                        }
+                }
+                // check length and page count
+                int length = maxIndex - minIndex + 1;
+                if (length == 0) {
+                        if (options.after != null) {
+                                sender.sendMessage(LastLogColors.MINOR + "After " + options.after);
+                        }
+                        if (options.before != null) {
+                                sender.sendMessage(LastLogColors.MINOR + "Before " + options.before);
+                        }
+                        sender.sendMessage(LastLogColors.ERROR + "[LastLog] Empty list!");
                         return;
                 }
-                sender.sendMessage(LastLogColors.HEADER
-                                   + (lastlog ? "Last login" : "First login")
-                                   + " - " + getLength() + " Players - Page ["
-                                   + (pageNumber + 1)
-                                   + "/" + getPageCount() + "]");
+                int pageCount = ((length - 1) / PAGE_LENGTH) + 1;
+                if (options.pageNumber >= pageCount) {
+                        sender.sendMessage(LastLogColors.ERROR + "[LastLog] Page " + (options.pageNumber + 1) + " selected, but only " + pageCount + " available!");
+                        return;
+                }
+                sender.sendMessage(LastLogColors.HEADER + (lastlog ? "Last login" : "First login") + " - " + length + " Players - Page [" + (options.pageNumber + 1) + "/" + pageCount + "]");
+                if (options.after != null) {
+                        sender.sendMessage(LastLogColors.MINOR + "After " + options.after);
+                }
+                if (options.before != null) {
+                        sender.sendMessage(LastLogColors.MINOR + "Before " + options.before);
+                }
                 for (int i = 0; i < PAGE_LENGTH; ++i) {
-                        int index = pageNumber * PAGE_LENGTH + i;
-                        if (index >= getLength() || index < 0) break;
+                        int index = minIndex + options.pageNumber * PAGE_LENGTH + i;
+                        if (index > maxIndex || index < minIndex) break;
                         String name = getEntry(index).name;
                         long date = getEntry(index).time;
                         String nameColor = Bukkit.getServer().getOfflinePlayer(name).isOnline() ? LastLogColors.ONLINE : LastLogColors.RESET;
