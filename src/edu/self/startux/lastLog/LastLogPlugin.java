@@ -38,6 +38,7 @@ public class LastLogPlugin extends JavaPlugin implements Listener {
         private LastLogExecutor firstLogExecutor = new LastLogExecutor(this, false);
         private LastLogExecutor lastLogExecutor = new LastLogExecutor(this, true);
         private LogInfoExecutor logInfoExecutor = new LogInfoExecutor(this);
+        private HelpScreen helpScreen;
 
         // // debug function. requires command registration!
         // @Override
@@ -59,6 +60,7 @@ public class LastLogPlugin extends JavaPlugin implements Listener {
                 OfflinePlayer[] players = getServer().getOfflinePlayers();
                 firstlogList = new PlayerList(players, false);
                 lastlogList = new PlayerList(players, true);
+                helpScreen = new HelpScreen(this);
         }
 
         @Override
@@ -66,6 +68,7 @@ public class LastLogPlugin extends JavaPlugin implements Listener {
                 logger = null;
                 firstlogList = null;
                 lastlogList = null;
+                helpScreen = null;
         }
 
         /**
@@ -91,6 +94,10 @@ public class LastLogPlugin extends JavaPlugin implements Listener {
                                 }
                         }
                 }
+        }
+
+        public void help(CommandSender sender) {
+                helpScreen.send(sender);
         }
 
         public PlayerList getPlayerList(boolean lastlog) {
