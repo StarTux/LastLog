@@ -1,0 +1,17 @@
+helpmessage: |-
+  `bCommands
+    `e/lastlog `f[`boptions`f] `f[`bpagenumber`f] `blist last logged in players
+    `e/firstlog `f[`boptions`f] `f[`bpagenumber`f] `blist first logged in players
+    `e/loginfo `f<`bPLAYERNAME`f> `bshow players' login dates
+  `bOptions
+    `e-a --after `f<`btime`f> `blimit to logins after `ftime
+    `e-b --before `f<`btime`f> `blimit to logins before `ftime
+    `e-h --help `bdisplay this help message
+  `bDescription
+    `etime `bTime can be described in one of many formats
+      `b1`fd`b12`fH`b30`fM `btime units before now
+      `fy`bears `fm`bonths `fw`beeks `fd`bays `fH`bours `fM`binutes `fS`beconds
+      `f2012`b-`f04`b-`f27 `bthe date in order year, month, day
+      `f18`b:`f20`b:`f31 `bthe time in order hours, minutes, seconds
+      `f2012`b-`f04`b-`f27`b-`f18`b:`f20`b:`f31 `bboth combined
+    `epagenumber `bthe output is split into pages of 10 entries
