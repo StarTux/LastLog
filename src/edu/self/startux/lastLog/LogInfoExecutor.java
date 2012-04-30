@@ -56,8 +56,25 @@ public class LogInfoExecutor implements CommandExecutor {
 
         @Override
         public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-                if (args.length == 0) return false;
+                if (args.length == 0) {
+                        if (sender.equals(plugin.getServer().getConsoleSender())) {
+                                return false;
+                        }
+                        args = new String[1];
+                        args[0] = sender.getName();
+                }
                 for (String arg : args) {
+                        if (arg.equalsIgnoreCase(sender.getName())) {
+                                if (!sender.hasPermission("lastlog.loginfo") && !sender.hasPermission("lastlog.self")) {
+                                        sender.sendMessage(LastLogColors.ERROR + "You don't have permission!");
+                                        return true;
+                                }
+                        } else {
+                                if (!sender.hasPermission("lastlog.loginfo")) {
+                                        sender.sendMessage(LastLogColors.ERROR + "You don't have permission!");
+                                        return true;
+                                }
+                        }
                         OfflinePlayer player = findPlayer(arg);
                         if (player == null) {
                                 sender.sendMessage("Player "
