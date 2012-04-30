@@ -1,3 +1,8 @@
+1.1.2
+
+* Add lastlog.self permission to look up yourself
+* Change /loginfo without arguments look up yourself
+
 1.1.1
 
 * Add -h/--help for help screen
