@@ -19,12 +19,12 @@
 
 package edu.self.startux.lastLog;
 
-import java.util.List;
+import java.util.UUID;
+
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class LogInfoExecutor implements CommandExecutor {
         private LastLogPlugin plugin;
@@ -33,24 +33,15 @@ public class LogInfoExecutor implements CommandExecutor {
                 this.plugin = plugin;
         }
         
-        public OfflinePlayer findPlayer(String name) {
+        public OfflinePlayer findPlayer(UUID uuid) {
                 // try match exact name with any known player
-                OfflinePlayer player = plugin.getServer().getOfflinePlayer(name);
+                OfflinePlayer player = plugin.getServer().getOfflinePlayer(uuid);
+                
                 // if none is found, be more lenient with online players
-                if (!player.hasPlayedBefore()) {
-                        player = plugin.getServer().getPlayer(name);
+                if (player != null && !player.hasPlayedBefore()) {
+                        player = plugin.getServer().getPlayer(uuid);
                 }
-                // if that fails, look if a matching player is known
-                if (player == null) {
-                        PlayerList list = plugin.getPlayerList(true);
-                        for (PlayerList.Entry entry : list) {
-                                String lowerName = name.toLowerCase();
-                                if (entry.name.toLowerCase().startsWith(lowerName)) {
-                                        player = plugin.getServer().getOfflinePlayer(entry.name);
-                                        break;
-                                }
-                        }
-                }
+
                 return player;
         }
 
@@ -75,25 +66,26 @@ public class LogInfoExecutor implements CommandExecutor {
                                         return true;
                                 }
                         }
-                        OfflinePlayer player = findPlayer(arg);
+                        OfflinePlayer player = findByName(arg);
                         if (player == null) {
                                 sender.sendMessage("Player "
                                                    + LastLogColors.UNKNOWN + arg + LastLogColors.RESET
                                                    + " is unknown");
                         } else {
+                        	    UUID uuid = player.getUniqueId();
                                 String name = player.getName();
                                 long first = player.getFirstPlayed();
                                 // Sometimes Bukkit stubbornly reports bogus dates even though they were accurate during initialization.
                                 // In those cases, fetch them from the cache.
                                 if (first == 0l) {
-                                        PlayerList.Entry entry = plugin.getPlayerList(false).getEntry(name);
+                                	 PlayerList.Entry entry = findByName(plugin.getPlayerList(false), name);
                                         if (entry != null) {
                                                 first = entry.time;
                                         }
                                 }
                                 long last = player.getLastPlayed();
                                 if (last == 0l) {
-                                        PlayerList.Entry entry = plugin.getPlayerList(true).getEntry(name);
+                                        PlayerList.Entry entry = findByName(plugin.getPlayerList(true), name);
                                         if (entry != null) {
                                                 last = entry.time;
                                         }
@@ -110,5 +102,26 @@ public class LogInfoExecutor implements CommandExecutor {
                         }
                 }
                 return true;
+        }
+        
+        public PlayerList.Entry findByName(PlayerList playerList, String name){
+        	for(PlayerList.Entry entry:playerList){
+        		if(entry.name.equalsIgnoreCase(name))
+        			return entry;
+        	}
+        	return null;
+        }
+        
+        public OfflinePlayer findByName(String name){
+        	
+        	 OfflinePlayer[] players = plugin.getServer().getOfflinePlayers();
+        	
+        	for(OfflinePlayer player: players){
+        		
+        		//Not sure why these nulls can happen but they do... 
+        		if(player != null && player.getName() != null && player.getName().equalsIgnoreCase(name))
+        			return player;
+        	}
+        	return null;
         }
 }

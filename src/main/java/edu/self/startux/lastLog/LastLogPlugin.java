@@ -19,6 +19,7 @@
 
 package edu.self.startux.lastLog;
 
+import java.util.UUID;
 import java.util.logging.Logger;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -80,11 +81,12 @@ public class LastLogPlugin extends JavaPlugin implements Listener {
         public void onPlayerJoin(PlayerJoinEvent event) {
                 Player player = event.getPlayer();
                 String name = player.getName();
+                UUID uuid = player.getUniqueId();
                 long last = System.currentTimeMillis();
-                lastlogList.set(name, last);
+                lastlogList.set(uuid, name, last);
                 if (!player.hasPlayedBefore()) {
                         long first = last;
-                        firstlogList.set(name, first);
+                        firstlogList.set(uuid, name, first);
                         String message = LastLogColors.UNKNOWN + name + LastLogColors.HEADER + " has logged in for the first time";
                         // getServer().broadcast(message, NOTIFY_PERMISSION); // this acts weird
                         getServer().getConsoleSender().sendMessage(message);
