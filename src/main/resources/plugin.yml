@@ -1,0 +1,42 @@
+name: LastLog
+version: 1.1.2
+description: Show listing of last logged in players
+main: edu.self.startux.lastLog.LastLogPlugin
+author: StarTux
+commands:
+  lastlog:
+    description: show listing of the last logged in players
+    permission: lastlog.lastlog
+    usage: "Usage: /lastlog [options] [pagenumber]"
+  firstlog:
+    description: show listing of the last players who logged in for the first time
+    permission: lastlog.firstlog
+    usage: "Usage: /firstlog [options] [pagenumber]"
+  loginfo:
+    description: show first and last login date of a user
+    usage: "Usage: /loginfo <playername>"
+permissions:
+  lastlog.*:
+    description: "get all permission nodes"
+    default: false
+    children:
+      lastlog.lastlog: true
+      lastlog.firstlog: true
+      lastlog.loginfo: true
+      lastlog.notify: true
+      lastlog.self: true
+  lastlog.lastlog:
+    description: "execute the /lastlog command"
+    default: op
+  lastlog.firstlog:
+    description: "execute the /firstlog command"
+    default: op
+  lastlog.loginfo:
+    description: "execute the /loginfo command"
+    default: op
+  lastlog.notify:
+    description: "get notified when a new player joins"
+    default: op
+  lastlog.self:
+    description: "query information about yourself"
+    default: op
