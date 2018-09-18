@@ -1,5 +1,5 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright 2012 StarTux.
+ * Copyright 2012-2018 StarTux.
  *
  * This file is part of LastLog.
  *
@@ -19,37 +19,26 @@
 
 package edu.self.startux.lastLog;
 
-import java.lang.StringBuffer;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.io.InputStreamReader;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-public class HelpScreen {
-        private LastLogPlugin plugin;
-        private String[] lines;
+final class HelpScreen {
+    private LastLogPlugin plugin;
+    private String[] lines;
 
-        public HelpScreen(LastLogPlugin plugin) {
-                this.plugin = plugin;
-                ConfigurationSection section = YamlConfiguration.loadConfiguration(plugin.getResource("help.yml"));
-                String message = section.getString("helpmessage");
-                Pattern pattern = Pattern.compile("`([0-9a-f])");
-                Matcher matcher = pattern.matcher(message);
-                StringBuffer buf = new StringBuffer();
-                while (matcher.find()) {
-                        matcher.appendReplacement(buf, ChatColor.getByChar(matcher.group(1).charAt(0)).toString());
-                }
-                matcher.appendTail(buf);
-                lines = buf.toString().split("\n");
-        }
+    HelpScreen(LastLogPlugin plugin) {
+        this.plugin = plugin;
+        ConfigurationSection config = YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource("help.yml")));
+        lines = ChatColor.translateAlternateColorCodes('&', config.getString("helpmessage")).split("\n");
+    }
 
-        public void send(CommandSender sender) {
-                sender.sendMessage(LastLogColors.HEADER + "[LastLog] Help");
-                for (String line : lines) {
-                        sender.sendMessage(line);
-                }
+    void send(CommandSender sender) {
+        sender.sendMessage(LastLogColors.HEADER + "[LastLog] Help");
+        for (String line : lines) {
+            sender.sendMessage(line);
         }
+    }
 }

@@ -1,5 +1,5 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright 2012 StarTux.
+ * Copyright 2012-2018 StarTux.
  *
  * This file is part of LastLog.
  *
@@ -21,14 +21,16 @@ package edu.self.startux.lastLog;
 
 import org.bukkit.ChatColor;
 
-public class LastLogColors {
-        final public static String PLAYER_NAME = "" + ChatColor.GOLD;
-        final public static String HEADER = "" + ChatColor.AQUA;
-        final public static String MINOR = "" + ChatColor.DARK_AQUA;
-        final public static String DATE = "" + ChatColor.YELLOW;
-        final public static String UNKNOWN = "" + ChatColor.GRAY;
-        final public static String ERROR = "" + ChatColor.RED;
-        final public static String RESET = "" + ChatColor.WHITE;
-        final public static String ONLINE = "" + ChatColor.GREEN;
-        final public static String OFFLINE = "" + ChatColor.RED;
+final class LastLogColors {
+    private LastLogColors() { }
+
+    public static final String PLAYER_NAME = "" + ChatColor.GOLD;
+    public static final String HEADER = "" + ChatColor.AQUA;
+    public static final String MINOR = "" + ChatColor.DARK_AQUA;
+    public static final String DATE = "" + ChatColor.YELLOW;
+    public static final String UNKNOWN = "" + ChatColor.GRAY;
+    public static final String ERROR = "" + ChatColor.RED;
+    public static final String RESET = "" + ChatColor.WHITE;
+    public static final String ONLINE = "" + ChatColor.GREEN;
+    public static final String OFFLINE = "" + ChatColor.RED;
 }
