@@ -4,6 +4,10 @@
 ## Description
 LastLog will list players who last joined your server or joined for the first time.  Furthermore, it can display the first and last login of specific players.  It comes with a rich set of filters to extract precise date ranges of player joins.  Its intended purpose is that server owners and their staff can easily see new players or who joined when.  There is no data storage; LastLog utilizes Bukkit player information which is already readily available and presents in an accessible manor.  Because said methods are computationally expensive, this plugin is not recommended for larger scale servers.
 
+## Links
+- [Source code](https://github.com/StarTux/LastLog) on Github
+- [BukkitDev plugin page](https://dev.bukkit.org/projects/lastlog)
+
 ## Commands
 
 - `/firstlog [pagenumber]` - List the most recent first logins of players
