@@ -7,6 +7,7 @@ LastLog will list players who last joined your server or joined for the first ti
 ## Links
 - [Source code](https://github.com/StarTux/LastLog) on Github
 - [BukkitDev plugin page](https://dev.bukkit.org/projects/lastlog)
+- [SpigotMC plugin page](https://www.spigotmc.org/resources/lastlog.60944/)
 
 ## Commands
 
